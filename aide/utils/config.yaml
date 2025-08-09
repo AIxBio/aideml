@@ -28,7 +28,6 @@ generate_report: True
 # LLM settings for final report from journal
 report:
   model: gpt-4-turbo
-  temp: 1.0
 
 # agent hyperparams
 agent:
@@ -44,12 +43,10 @@ agent:
   # LLM settings for coding
   code:
     model: gpt-4-turbo
-    temp: 0.5
 
   # LLM settings for evaluating program output / tracebacks
   feedback:
     model: gpt-4-turbo
-    temp: 0.5
 
   # hyperparameters for the tree search
   search:

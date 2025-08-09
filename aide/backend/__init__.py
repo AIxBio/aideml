@@ -27,7 +27,6 @@ def query(
     system_message: PromptType | None,
     user_message: PromptType | None,
     model: str,
-    temperature: float | None = None,
     max_tokens: int | None = None,
     func_spec: FunctionSpec | None = None,
     **model_kwargs,
@@ -40,7 +39,6 @@ def query(
         system_message (PromptType | None): Uncompiled system message (will generate a message following the OpenAI/Anthropic format)
         user_message (PromptType | None): Uncompiled user message (will generate a message following the OpenAI/Anthropic format)
         model (str): string identifier for the model to use (e.g. "gpt-4-turbo")
-        temperature (float | None, optional): Temperature to sample at. Defaults to the model-specific default.
         max_tokens (int | None, optional): Maximum number of tokens to generate. Defaults to the model-specific max tokens.
         func_spec (FunctionSpec | None, optional): Optional FunctionSpec object defining a function call. If given, the return value will be a dict.
 
@@ -50,7 +48,6 @@ def query(
 
     model_kwargs = model_kwargs | {
         "model": model,
-        "temperature": temperature,
         "max_tokens": max_tokens,
     }
 
@@ -60,7 +57,6 @@ def query(
         if system_message:
             user_message = system_message
         system_message = None
-        model_kwargs["temperature"] = 1
 
     provider = determine_provider(model)
     query_func = provider_to_query_func[provider]
